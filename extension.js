@@ -29,7 +29,7 @@ const saveAllFiles = async () => {
 };
 
 const activate = (context) => {
-    outputChannel = vscode.window.createOutputChannel('RunCode C/C++');
+    outputChannel = vscode.window.createOutputChannel('Run CPP');
     exec('gcc --version', (error) => {
         if (error) {
             vscode.window.showErrorMessage('Không tìm thấy trình biên dịch, vui lòng cài theo hướng dẫn sau.');

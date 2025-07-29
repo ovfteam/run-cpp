@@ -34,7 +34,7 @@
             }
         ],
         "configuration": {
-            "title": "RunCode C/C++",
+            "title": "Run CPP",
             "properties": {
                 "runcode.autoSave": {
                     "type": "boolean",
@@ -95,16 +95,18 @@
         "@types/vscode": "1.85.0",
         "@vscode/test-cli": "0.0.4",
         "@vscode/test-electron": "2.3.8",
+        "@vscode/vsce": "3.6.0",
         "eslint": "8.56.0",
         "typescript": "5.3.3"
     },
-    "displayName": "RunCode C/C++",
+    "displayName": "Run CPP",
     "engines": {
-        "vscode": ">=1.85.0"
+        "vscode": "^1.85.0"
     },
     "extensionDependencies": [
         "ms-vscode.cpptools"
     ],
+    "homepage": "https://ovfteam.com/",
     "icon": "icon.png",
     "keywords": [
         "C",
@@ -114,14 +116,15 @@
         "debug"
     ],
     "main": "./extension.js",
-    "name": "runcode",
-    "publisher": "tripleseven190504",
+    "name": "run-cpp",
+    "publisher": "ovfteam",
     "repository": {
         "type": "git",
-        "url": "https://github.com/ovfteam/runcode_c_cpp"
+        "url": "https://github.com/ovfteam/run-cpp"
     },
     "scripts": {
-        "deploy": "vsce publish"
+        "package": "vsce package --yarn",
+        "deploy": "vsce publish --yarn"
     },
-    "version": "0.0.3"
+    "version": "0.0.1"
 }

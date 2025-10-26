@@ -10,8 +10,14 @@ let outputChannel;
 const getConfig = () => vscode.workspace.getConfiguration('runcode');
 
 const findGdbPath = () => {
-    const possiblePaths = ['C:/ProgramData/mingw64/mingw64/bin/gdb.exe', 'C:/mingw64/bin/gdb.exe', 'C:/msys64/mingw64/bin/gdb.exe', 'gdb.exe'];
-
+    const confirmedPath = 'C:/ProgramData/mingw64/mingw64/bin/gdb.exe';
+    try {
+        if (fs.existsSync(confirmedPath)) {
+            return confirmedPath;
+        }
+    } catch {}
+    
+    const possiblePaths = ['C:/mingw64/bin/gdb.exe', 'C:/msys64/mingw64/bin/gdb.exe', 'gdb.exe'];
     for (const gdbPath of possiblePaths) {
         try {
             if (fs.existsSync(gdbPath)) {
@@ -197,7 +203,16 @@ exit`;
                             args: [],
                             stopAtEntry: true,
                             cwd: path.dirname(filePath),
-                            environment: [],
+                            environment: [
+                                {
+                                    name: "PATH",
+                                    value: "${env:PATH};C:/ProgramData/mingw64/mingw64/bin;C:/mingw64/bin;C:/msys64/mingw64/bin"
+                                },
+                                {
+                                    name: "MINGW_HOME",
+                                    value: "C:/ProgramData/mingw64/mingw64"
+                                }
+                            ],
                             externalConsole: true,
                             MIMode: 'gdb',
                             miDebuggerPath: findGdbPath(),
